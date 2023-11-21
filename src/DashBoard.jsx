@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+
 import firebaseApp from "./Config";
 import {
   getFirestore,
@@ -9,6 +12,8 @@ import {
   orderBy,
   addDoc,
 } from "firebase/firestore";
+
+import AddEmployee from "./AddEmployee";
 
 function DashBoard() {
   // employee list state
@@ -56,6 +61,17 @@ function DashBoard() {
     }
   }, []);
 
+  // input modal state
+  const [inputModalVisible, setInputModalVisibility] = useState(false);
+
+  const openModal = () => {
+    setInputModalVisibility(true);
+  };
+
+  const closeModal = () => {
+    setInputModalVisibility(false);
+  };
+
   // 🔹 INPUT DATA FROM FIREBASE 🔹
   const addEmployee = () => {
     // initialize config
@@ -92,19 +108,33 @@ function DashBoard() {
     <main className="container m-5">
       <h1 className="display-3 text-center fw-bold m-3">Employee Records</h1>
 
-      {/* Add Emplyoyee Button */}
-      <button className="btn btn-dark my-3">+ Add Employee</button>
+      {/* Add Employee Section */}
+      <section>
+        <button className="btn btn-dark my-3" onClick={openModal}>
+          + Add Employee
+        </button>
 
-      {/* Search Employee Bar */}
-      <input
-        type="text"
-        className="form-control mb-3"
-        placeholder="Search employee..."
-        value={searchEmployee}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
+        {inputModalVisible && (
+          <AddEmployee
+            closeModal={closeModal}
+            employee={employee}
+            setEmployee={setEmployee}
+          />
+        )}
+      </section>
 
-      {/* Data Table Display */}
+      {/* Search Employee Bar Section */}
+      <section>
+        <input
+          type="text"
+          className="form-control mb-3"
+          placeholder="Search employee..."
+          value={searchEmployee}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </section>
+
+      {/* Data Table Display Section */}
       <section className="card mt-4">
         <div className="card-body">
           <table className="table">
