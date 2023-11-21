@@ -171,6 +171,27 @@ function AddEmployee({ closeModal, employee, setEmployee, addEmployee }) {
 
                 <div className="col-md-12">
                   {" "}
+                  {/* date input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="date"
+                      className="form-control"
+                      id="date"
+                      placeholder="Date Hired"
+                      value={employee.date}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          date: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="date">Date Hired</label>
+                  </section>
+                </div>
+
+                <div className="col-md-12">
+                  {" "}
                   {/* position input */}
                   <section className="form-floating mb-3">
                     <input

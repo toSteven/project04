@@ -11,6 +11,7 @@ import {
   query,
   orderBy,
   addDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 
 import AddEmployee from "./AddEmployee";
@@ -37,6 +38,7 @@ function DashBoard() {
     email: "",
     mobile: "",
     address: "",
+    date: "",
     position: "",
   });
 
@@ -85,8 +87,17 @@ function DashBoard() {
       email: "",
       mobile: "",
       address: "",
+      date: "",
       position: "",
     });
+  };
+
+  // date to string function
+  const formatDate = (date) => {
+    if (date && date.toDate) {
+      return date.toDate().toLocaleDateString();
+    }
+    return "";
   };
 
   // 🔹 INPUT DATA FROM FIREBASE 🔹
@@ -103,6 +114,7 @@ function DashBoard() {
       employee.email === "" ||
       employee.mobile === "" ||
       employee.address === "" ||
+      employee.date === "" ||
       employee.position === ""
     ) {
       alert("Missing fields!");
@@ -114,7 +126,7 @@ function DashBoard() {
       addDoc(collection(db, "database"), employee);
 
       alert(
-        `${employee.lastname} ${employee.firstname} added employee as ${employee.position}`
+        `${employee.lastname} ${employee.firstname} added employee as ${employee.position} at ${employee.date}`
       );
 
       // cleare flieds
@@ -126,6 +138,7 @@ function DashBoard() {
         email: "",
         mobile: "",
         address: "",
+        date: "",
         position: "",
       });
     }
@@ -177,7 +190,7 @@ function DashBoard() {
                 <th>Last Name</th>
                 <th>First Name</th>
                 <th>Position</th>
-                <th>Action</th>
+                <th></th>
               </tr>
             </thead>
 
@@ -189,7 +202,7 @@ function DashBoard() {
                   <td>{employee.firstname}</td>
                   <td>{employee.position}</td>
                   <td>
-                    <button className="btn btn-dark">Data</button>
+                    <button className="btn btn-dark">📋</button>
                   </td>
                 </tr>
               ))}
