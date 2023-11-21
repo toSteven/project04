@@ -34,7 +34,10 @@ function DashBoard() {
     firstname: "",
     age: "",
     gender: "",
-    station: "",
+    email: "",
+    mobile: "",
+    address: "",
+    position: "",
   });
 
   useEffect(() => {
@@ -64,10 +67,12 @@ function DashBoard() {
   // input modal state
   const [inputModalVisible, setInputModalVisibility] = useState(false);
 
+  // inpute modal open
   const openModal = () => {
     setInputModalVisibility(true);
   };
 
+  // inpute modal close
   const closeModal = () => {
     setInputModalVisibility(false);
 
@@ -77,7 +82,10 @@ function DashBoard() {
       firstname: "",
       age: "",
       gender: "",
-      station: "",
+      email: "",
+      mobile: "",
+      address: "",
+      position: "",
     });
   };
 
@@ -92,7 +100,10 @@ function DashBoard() {
       employee.firstname === "" ||
       employee.age === "" ||
       employee.gender === "" ||
-      employee.station === ""
+      employee.email === "" ||
+      employee.mobile === "" ||
+      employee.address === "" ||
+      employee.position === ""
     ) {
       alert("Missing fields!");
     } else {
@@ -103,7 +114,7 @@ function DashBoard() {
       addDoc(collection(db, "database"), employee);
 
       alert(
-        `${employee.lastname} ${employee.firstname} added employee as ${employee.station}`
+        `${employee.lastname} ${employee.firstname} added employee as ${employee.position}`
       );
 
       // cleare flieds
@@ -112,53 +123,60 @@ function DashBoard() {
         firstname: "",
         age: "",
         gender: "",
-        station: "",
+        email: "",
+        mobile: "",
+        address: "",
+        position: "",
       });
     }
   };
 
   return (
     <main className="container m-5">
-      <h1 className="display-3 text-center fw-bold m-3">Employee Records</h1>
+      <h1 className="display-3 text-center fw-bold my-3">Employee Records</h1>
 
-      {/* Add Employee Section */}
-      <section>
-        <button className="btn btn-dark my-3" onClick={openModal}>
-          + Add Employee
-        </button>
+      {/* Top Controls */}
+      <section class="navbar bg-secondary rounded-3">
+        <div class="container-fluid">
+          {/* Add Employee Section */}
+          <section className="me-3">
+            <button className="btn btn-dark rounded-3" onClick={openModal}>
+              + Add Employee
+            </button>
 
-        {inputModalVisible && (
-          <AddEmployee
-            closeModal={closeModal}
-            employee={employee}
-            setEmployee={setEmployee}
-            addEmployee={addEmployee}
-          />
-        )}
-      </section>
-
-      {/* Search Employee Bar Section */}
-      <section>
-        <input
-          type="text"
-          className="form-control mb-3"
-          placeholder="Search employee..."
-          value={searchEmployee}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+            {inputModalVisible && (
+              <AddEmployee
+                closeModal={closeModal}
+                employee={employee}
+                setEmployee={setEmployee}
+                addEmployee={addEmployee}
+              />
+            )}
+          </section>
+          <form class="d-flex">
+            {/* Search Employee Bar Section */}
+            <section>
+              <input
+                type="text"
+                className="form-control bg-light"
+                placeholder="Search employee..."
+                value={searchEmployee}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </section>
+          </form>
+        </div>
       </section>
 
       {/* Data Table Display Section */}
-      <section className="card mt-4">
+      <section className="card mt-3">
         <div className="card-body">
-          <table className="table">
+          <table className="table text-center">
             <thead>
               <tr>
                 <th>Last Name</th>
                 <th>First Name</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Station</th>
+                <th>Position</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -169,9 +187,7 @@ function DashBoard() {
                 <tr key={employee.employee_id}>
                   <td>{employee.lastname}</td>
                   <td>{employee.firstname}</td>
-                  <td>{employee.age}</td>
-                  <td>{employee.gender}</td>
-                  <td>{employee.station}</td>
+                  <td>{employee.position}</td>
                   <td>
                     <button className="btn btn-dark">Data</button>
                   </td>

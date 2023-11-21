@@ -2,14 +2,14 @@ import { Link, NavLink } from "react-router-dom";
 
 function NarBar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-dark">
+    <nav className="navbar navbar-expand-lg bg-secondary">
       <div className="container-fluid">
         <Link className="navbar-brand text-white" to="/">
           NavBar
         </Link>
 
         <button
-          className="navbar-toggler"
+          className="navbar-toggler bg-light"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"

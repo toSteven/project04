@@ -8,8 +8,8 @@ function AddEmployee({ closeModal, employee, setEmployee, addEmployee }) {
       >
         <div className="modal-dialog">
           <div className="modal-content shadow">
-            <div className="modal-header">
-              <h1 className="modal-title">Add Employee</h1>
+            <div className="modal-header bg-secondary">
+              <h1 className="modal-title text-white">Add Employee</h1>
               {/* close modal button */}
               <button
                 type="button"
@@ -105,24 +105,88 @@ function AddEmployee({ closeModal, employee, setEmployee, addEmployee }) {
                   </section>
                 </div>
 
+                <div className="col-md-6">
+                  {" "}
+                  {/* email input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      placeholder="Email"
+                      value={employee.email}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          email: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="email">Email</label>
+                  </section>
+                </div>
+
+                <div className="col-md-6">
+                  {" "}
+                  {/* mobile number input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="tel"
+                      pattern="[[0-9]{3}-[0-9]{3}-[0-9]{5}"
+                      className="form-control"
+                      id="mobile"
+                      placeholder="Mobile No."
+                      value={employee.mobile}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          mobile: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="mobile">Mobile No.</label>
+                  </section>
+                </div>
+
                 <div className="col-md-12">
                   {" "}
-                  {/* station input */}
+                  {/* address input */}
                   <section className="form-floating mb-3">
                     <input
                       type="text"
                       className="form-control"
-                      id="station"
+                      id="address"
+                      placeholder="Station"
+                      value={employee.address}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          address: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="address">Address</label>
+                  </section>
+                </div>
+
+                <div className="col-md-12">
+                  {" "}
+                  {/* position input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="position"
                       placeholder="Station"
                       value={employee.station}
                       onChange={(e) => {
                         setEmployee({
                           ...employee,
-                          station: e.target.value,
+                          position: e.target.value,
                         });
                       }}
                     />
-                    <label htmlFor="station">Station</label>
+                    <label htmlFor="station">Position</label>
                   </section>
                 </div>
               </div>
