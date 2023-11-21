@@ -2,9 +2,9 @@ import { Link, NavLink } from "react-router-dom";
 
 function NarBar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-dark">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand text-white" to="/">
           NavBar
         </Link>
 
@@ -22,7 +22,7 @@ function NarBar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">
+              <NavLink className="nav-link text-white" to="/">
                 Dashboard
               </NavLink>
             </li>

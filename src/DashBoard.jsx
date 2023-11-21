@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import firebaseApp from "./Config";
 import {
   getFirestore,
@@ -6,6 +7,7 @@ import {
   onSnapshot,
   query,
   orderBy,
+  addDoc,
 } from "firebase/firestore";
 
 function DashBoard() {
@@ -15,16 +17,26 @@ function DashBoard() {
   // search state
   const [searchEmployee, setSearchQuery] = useState("");
 
+  // filtered search employee list function
   const filteredEmployeeList = employeeList.filter((employee) => {
     const fullName = `${employee.lastname} ${employee.firstname}`.toLowerCase();
     return fullName.includes(searchEmployee.toLowerCase());
   });
 
+  // employee object state
+  const [employee, setEmployee] = useState({
+    lastname: "",
+    firstname: "",
+    age: "",
+    gender: "",
+    station: "",
+  });
+
   useEffect(() => {
-    // init config
+    // initialize config
     const db = getFirestore(firebaseApp);
 
-    // READ DATA FROM FIREBASE
+    // 🔹 READ DATA FROM FIREBASE 🔹
     try {
       onSnapshot(
         query(collection(db, "database"), orderBy("lastname", "asc")),
@@ -44,11 +56,46 @@ function DashBoard() {
     }
   }, []);
 
+  // 🔹 INPUT DATA FROM FIREBASE 🔹
+  const addEmployee = () => {
+    // initialize config
+    const db = getFirestore(firebaseApp);
+
+    // input config
+    if (
+      employee.lastname === "" ||
+      employee.firstname === "" ||
+      employee.age === "" ||
+      employee.gender === "" ||
+      employee.station === ""
+    ) {
+      alert("Missing fields!");
+    } else {
+      // set the input data to employee list state
+      setEmployeeList((setList) => [...setList, employee]);
+
+      // add employee list to db
+      addDoc(collection(db, "database"), employee);
+
+      // cleare flieds
+      setEmployee({
+        lastname: "",
+        firstname: "",
+        age: "",
+        gender: "",
+        station: "",
+      });
+    }
+  };
+
   return (
     <main className="container m-5">
       <h1 className="display-3 text-center fw-bold m-3">Employee Records</h1>
 
-      {/* Searc Employee Bar */}
+      {/* Add Emplyoyee Button */}
+      <button className="btn btn-dark my-3">+ Add Employee</button>
+
+      {/* Search Employee Bar */}
       <input
         type="text"
         className="form-control mb-3"
@@ -72,6 +119,7 @@ function DashBoard() {
               </tr>
             </thead>
 
+            {/*  Data  */}
             <tbody>
               {filteredEmployeeList.map((employee) => (
                 <tr key={employee.employee_id}>
