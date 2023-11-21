@@ -70,6 +70,15 @@ function DashBoard() {
 
   const closeModal = () => {
     setInputModalVisibility(false);
+
+    // cleare flieds
+    setEmployee({
+      lastname: "",
+      firstname: "",
+      age: "",
+      gender: "",
+      station: "",
+    });
   };
 
   // 🔹 INPUT DATA FROM FIREBASE 🔹
@@ -92,6 +101,10 @@ function DashBoard() {
 
       // add employee list to db
       addDoc(collection(db, "database"), employee);
+
+      alert(
+        `${employee.lastname} ${employee.firstname} added employee as ${employee.station}`
+      );
 
       // cleare flieds
       setEmployee({
@@ -119,6 +132,7 @@ function DashBoard() {
             closeModal={closeModal}
             employee={employee}
             setEmployee={setEmployee}
+            addEmployee={addEmployee}
           />
         )}
       </section>
