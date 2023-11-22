@@ -168,9 +168,11 @@ function DashBoard() {
   // edit modal state
   const [edittModalVisible, setEditModalVisibility] = useState(false);
 
+  // selected employee state for thres for  props
+  const [selectedEmployee, setSelectedemployee] = useState(null);
+
   // edit modal open
-  const openEditModal = (employee) => {
-    setEmployee(employee); // Set the employee state before opening the modal
+  const openEditModal = () => {
     setEditModalVisibility(true);
   };
 
@@ -185,36 +187,38 @@ function DashBoard() {
     const db = getFirestore(firebaseApp);
 
     try {
-      const employeeRef = doc(db, "database", employee.employee_id);
+      const employeeRef = doc(db, "database", selectedEmployee.employee_id);
 
-      const updateEmployee = {
-        lastname: employee.lastname,
-        firstname: employee.firstname,
-        age: employee.age,
-        gender: employee.gender,
-        email: employee.email,
-        mobile: employee.mobile,
-        address: employee.address,
-        date: employee.date,
-        position: employee.position,
+      const updatedEmployee = {
+        lastname: selectedEmployee.lastname,
+        firstname: selectedEmployee.firstname,
+        age: selectedEmployee.age,
+        lastname: selectedEmployee.lastname,
+        gender: selectedEmployee.gender,
+        email: selectedEmployee.email,
+        mobile: selectedEmployee.mobile,
+        address: selectedEmployee.address,
+        date: selectedEmployee.date,
+        position: selectedEmployee.position,
       };
 
-      updateDoc(updateEmployee, {
-        lastname: employee.lastname,
-        firstname: employee.firstname,
-        age: employee.age,
-        gender: employee.gender,
-        email: employee.email,
-        mobile: employee.mobile,
-        address: employee.address,
-        date: employee.date,
-        position: employee.position,
+      updateDoc(employeeRef, {
+        lastname: selectedEmployee.lastname,
+        firstname: selectedEmployee.firstname,
+        age: selectedEmployee.age,
+        lastname: selectedEmployee.lastname,
+        gender: selectedEmployee.gender,
+        email: selectedEmployee.email,
+        mobile: selectedEmployee.mobile,
+        address: selectedEmployee.address,
+        date: selectedEmployee.date,
+        position: selectedEmployee.position,
       });
 
-      alert("Update successfully !");
+      alert("Update successfuly !");
       closeEditModal();
     } catch (error) {
-      alert("Unable to Update!");
+      alert("Update failed !");
     }
   };
 
@@ -282,16 +286,12 @@ function DashBoard() {
                     {/* Edit Data */}
                     <button
                       className="btn btn-dark m-2"
-                      onClick={() => openEditModal(employee)}
+                      onClick={openEditModal}
                     >
                       Edit
                     </button>
                     {edittModalVisible && (
-                      <EditEmployee
-                        closeModal={closeEditModal}
-                        employee={employee}
-                        setEmployee={setEmployee}
-                      />
+                      <EditEmployee closeModal={closeEditModal} />
                     )}
 
                     {/* Delete Data */}

@@ -194,7 +194,7 @@ function AddEmployee({ closeModal, employee, setEmployee, addEmployee }) {
                       type="text"
                       className="form-control"
                       id="position"
-                      placeholder="Station"
+                      placeholder="Position"
                       value={employee.position}
                       onChange={(e) => {
                         setEmployee({

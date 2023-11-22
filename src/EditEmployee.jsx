@@ -1,4 +1,4 @@
-function EditEmployee({ closeModal, employee, setEmployee }) {
+function EditEmployee({ closeModal }) {
   return (
     <>
       <section className="modal" tabIndex="-1" style={{ display: "block" }}>
@@ -27,13 +27,6 @@ function EditEmployee({ closeModal, employee, setEmployee }) {
                       className="form-control"
                       id="lastname"
                       placeholder="Last Name"
-                      value={employee.lastname}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          lastname: e.target.value,
-                        });
-                      }}
                     />
                     <label htmlFor="lastname">Last Name</label>
                   </section>
@@ -47,13 +40,6 @@ function EditEmployee({ closeModal, employee, setEmployee }) {
                       className="form-control"
                       id="firstname"
                       placeholder="First Name"
-                      value={employee.firstname}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          firstname: e.target.value,
-                        });
-                      }}
                     />
                     <label htmlFor="firstname">First Name</label>
                   </section>
@@ -69,13 +55,6 @@ function EditEmployee({ closeModal, employee, setEmployee }) {
                       id="age"
                       placeholder="Age"
                       min={18}
-                      value={employee.age}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          age: e.target.value,
-                        });
-                      }}
                     />
                     <label htmlFor="age">Age</label>
                   </section>
@@ -89,13 +68,6 @@ function EditEmployee({ closeModal, employee, setEmployee }) {
                       className="form-control"
                       id="gender"
                       placeholder="Gender"
-                      value={employee.gender}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          gender: e.target.value,
-                        });
-                      }}
                     />
                     <label htmlFor="gender">Gender</label>
                   </section>
@@ -110,13 +82,6 @@ function EditEmployee({ closeModal, employee, setEmployee }) {
                       className="form-control"
                       id="email"
                       placeholder="Email"
-                      value={employee.email}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          email: e.target.value,
-                        });
-                      }}
                     />
                     <label htmlFor="email">Email</label>
                   </section>
@@ -132,13 +97,6 @@ function EditEmployee({ closeModal, employee, setEmployee }) {
                       className="form-control"
                       id="mobile"
                       placeholder="Mobile No."
-                      value={employee.mobile}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          mobile: e.target.value,
-                        });
-                      }}
                     />
                     <label htmlFor="mobile">Mobile No.</label>
                   </section>
@@ -152,14 +110,7 @@ function EditEmployee({ closeModal, employee, setEmployee }) {
                       type="text"
                       className="form-control"
                       id="address"
-                      placeholder="Station"
-                      value={employee.address}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          address: e.target.value,
-                        });
-                      }}
+                      placeholder="Address"
                     />
                     <label htmlFor="address">Address</label>
                   </section>
@@ -174,13 +125,6 @@ function EditEmployee({ closeModal, employee, setEmployee }) {
                       className="form-control"
                       id="date"
                       placeholder="Date Hired"
-                      value={employee.date}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          date: e.target.value,
-                        });
-                      }}
                     />
                     <label htmlFor="date">Date Hired</label>
                   </section>
@@ -194,14 +138,7 @@ function EditEmployee({ closeModal, employee, setEmployee }) {
                       type="text"
                       className="form-control"
                       id="position"
-                      placeholder="Station"
-                      value={employee.position}
-                      onChange={(e) => {
-                        setEmployee({
-                          ...employee,
-                          position: e.target.value,
-                        });
-                      }}
+                      placeholder="Position"
                     />
                     <label htmlFor="station">Position</label>
                   </section>
@@ -211,13 +148,7 @@ function EditEmployee({ closeModal, employee, setEmployee }) {
 
             {/* submit button */}
             <section className="modal-footer d-flex justify-content-center">
-              <button
-                type="button"
-                className="btn btn-success text-center "
-                onClick={() => {
-                  editEmployee();
-                }}
-              >
+              <button type="button" className="btn btn-success text-center ">
                 Confirm
               </button>
             </section>
