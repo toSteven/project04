@@ -11,7 +11,8 @@ import {
   query,
   orderBy,
   addDoc,
-  serverTimestamp,
+  doc,
+  deleteDoc,
 } from "firebase/firestore";
 
 import AddEmployee from "./AddEmployee";
@@ -46,7 +47,7 @@ function DashBoard() {
     // initialize config
     const db = getFirestore(firebaseApp);
 
-    // 🔹 READ DATA FROM FIREBASE 🔹
+    // 🔹 FETCH DATA FROM FIREBASE 🔹
     try {
       onSnapshot(
         query(collection(db, "database"), orderBy("lastname", "asc")),
@@ -70,12 +71,12 @@ function DashBoard() {
   const [inputModalVisible, setInputModalVisibility] = useState(false);
 
   // inpute modal open
-  const openModal = () => {
+  const openInputModal = () => {
     setInputModalVisibility(true);
   };
 
   // inpute modal close
-  const closeModal = () => {
+  const closeInputModal = () => {
     setInputModalVisibility(false);
 
     // cleare flieds
@@ -100,7 +101,7 @@ function DashBoard() {
     return "";
   };
 
-  // 🔹 INPUT DATA FROM FIREBASE 🔹
+  // 🔹 ADD DATA FROM FIREBASE 🔹
   const addEmployee = () => {
     // initialize config
     const db = getFirestore(firebaseApp);
@@ -144,6 +145,24 @@ function DashBoard() {
     }
   };
 
+  // 🔹 DELETE DATA FROM FIREBASE 🔹
+  const deleteEmployee = (employee_id) => {
+    // initialize config
+    const db = getFirestore(firebaseApp);
+
+    // confirmation pop up
+    const userConfirmed = window.confirm(
+      `Are you sure you want to delete records ?`
+    );
+
+    // delete config
+    if (userConfirmed) {
+      // delete from db
+      deleteDoc(doc(db, "database", employee_id));
+      alert("Record deleted !");
+    }
+  };
+
   return (
     <main className="container m-5">
       <h1 className="display-3 text-center fw-bold my-3">Employee Records</h1>
@@ -153,13 +172,13 @@ function DashBoard() {
         <div class="container-fluid">
           {/* Add Employee Section */}
           <section className="me-3">
-            <button className="btn btn-dark rounded-3" onClick={openModal}>
+            <button className="btn btn-dark rounded-3" onClick={openInputModal}>
               + Add Employee
             </button>
 
             {inputModalVisible && (
               <AddEmployee
-                closeModal={closeModal}
+                closeModal={closeInputModal}
                 employee={employee}
                 setEmployee={setEmployee}
                 addEmployee={addEmployee}
@@ -190,7 +209,7 @@ function DashBoard() {
                 <th>Last Name</th>
                 <th>First Name</th>
                 <th>Position</th>
-                <th></th>
+                <th>Action</th>
               </tr>
             </thead>
 
@@ -202,7 +221,19 @@ function DashBoard() {
                   <td>{employee.firstname}</td>
                   <td>{employee.position}</td>
                   <td>
-                    <button className="btn btn-dark">📋</button>
+                    {/* Show Data */}
+                    <button className="btn btn-dark m-2">Data</button>
+
+                    {/* Edit Data */}
+                    <button className="btn btn-dark m-2">Edit</button>
+
+                    {/* Delete Data */}
+                    <button
+                      className="btn btn-dark m-2"
+                      onClick={() => deleteEmployee(employee.employee_id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

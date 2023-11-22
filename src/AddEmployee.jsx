@@ -1,11 +1,7 @@
 function AddEmployee({ closeModal, employee, setEmployee, addEmployee }) {
   return (
     <>
-      <section
-        className="modal mt-5"
-        tabIndex="-1"
-        style={{ display: "block" }}
-      >
+      <section className="modal" tabIndex="-1" style={{ display: "block" }}>
         <div className="modal-dialog">
           <div className="modal-content shadow">
             <div className="modal-header bg-secondary">
