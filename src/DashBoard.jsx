@@ -279,7 +279,15 @@ function DashBoard() {
                     <button className="btn btn-dark m-2">Data</button>
 
                     {/* Edit Data */}
-                    <button className="btn btn-dark m-2">Edit</button>
+                    <button
+                      className="btn btn-dark m-2"
+                      onClick={openEditModal}
+                    >
+                      Edit
+                    </button>
+                    {edittModalVisible && (
+                      <EditEmployee closeModal={closeEditModal} />
+                    )}
 
                     {/* Delete Data */}
                     <button
