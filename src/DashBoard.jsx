@@ -13,9 +13,11 @@ import {
   addDoc,
   doc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 import AddEmployee from "./AddEmployee";
+import EditEmployee from "./EditEmployee";
 
 function DashBoard() {
   // employee list state
@@ -160,6 +162,58 @@ function DashBoard() {
       // delete from db
       deleteDoc(doc(db, "database", employee_id));
       alert("Record deleted !");
+    }
+  };
+
+  // edit modal state
+  const [edittModalVisible, setEditodalVisibility] = useState(false);
+
+  // edit modal open
+  const openEditModal = () => {
+    setEditodalVisibility(true);
+  };
+
+  // edit modal close
+  const closeEditModal = () => {
+    setEditodalVisibility(false);
+  };
+
+  // 🔹 EDIT DATA FROM FIREBASE 🔹
+  const editEmployee = () => {
+    // initialize config
+    const db = getFirestore(firebaseApp);
+
+    try {
+      const employeeRef = doc(db, "database", employee.employee_id);
+
+      const updateEmployee = {
+        lastname: employee.lastname,
+        firstname: employee.firstname,
+        age: employee.age,
+        gender: employee.gender,
+        email: employee.email,
+        mobile: employee.mobile,
+        address: employee.address,
+        date: employee.date,
+        position: employee.position,
+      };
+
+      updateDoc(updateEmployee, {
+        lastname: employee.lastname,
+        firstname: employee.firstname,
+        age: employee.age,
+        gender: employee.gender,
+        email: employee.email,
+        mobile: employee.mobile,
+        address: employee.address,
+        date: employee.date,
+        position: employee.position,
+      });
+
+      alert("Update successfully !");
+      closeEditModal();
+    } catch (error) {
+      alert("Unable to Update!");
     }
   };
 
