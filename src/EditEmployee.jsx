@@ -1,4 +1,4 @@
-function EditEmployee({ closeModal }) {
+function EditEmployee({ closeModal, employee, setEmployee }) {
   return (
     <>
       <section className="modal" tabIndex="-1" style={{ display: "block" }}>
@@ -17,12 +17,207 @@ function EditEmployee({ closeModal }) {
             </section>
 
             <section className="modal-body">
-              <h1>Modal Data Here...</h1>
+              <div className="row">
+                <div className="col-md-6">
+                  {" "}
+                  {/* last name input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="lastname"
+                      placeholder="Last Name"
+                      value={employee.lastname}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          lastname: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="lastname">Last Name</label>
+                  </section>
+                </div>
+                <div className="col-md-6">
+                  {" "}
+                  {/* first name input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="firstname"
+                      placeholder="First Name"
+                      value={employee.firstname}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          firstname: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="firstname">First Name</label>
+                  </section>
+                </div>
+
+                <div className="col-md-6">
+                  {" "}
+                  {/* age input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="age"
+                      placeholder="Age"
+                      min={18}
+                      value={employee.age}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          age: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="age">Age</label>
+                  </section>
+                </div>
+                <div className="col-md-6">
+                  {" "}
+                  {/* gender input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="gender"
+                      placeholder="Gender"
+                      value={employee.gender}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          gender: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="gender">Gender</label>
+                  </section>
+                </div>
+
+                <div className="col-md-6">
+                  {" "}
+                  {/* email input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      placeholder="Email"
+                      value={employee.email}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          email: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="email">Email</label>
+                  </section>
+                </div>
+
+                <div className="col-md-6">
+                  {" "}
+                  {/* mobile number input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="tel"
+                      pattern="[[0-9]{3}-[0-9]{3}-[0-9]{5}"
+                      className="form-control"
+                      id="mobile"
+                      placeholder="Mobile No."
+                      value={employee.mobile}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          mobile: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="mobile">Mobile No.</label>
+                  </section>
+                </div>
+
+                <div className="col-md-12">
+                  {" "}
+                  {/* address input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="address"
+                      placeholder="Station"
+                      value={employee.address}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          address: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="address">Address</label>
+                  </section>
+                </div>
+
+                <div className="col-md-12">
+                  {" "}
+                  {/* date input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="date"
+                      className="form-control"
+                      id="date"
+                      placeholder="Date Hired"
+                      value={employee.date}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          date: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="date">Date Hired</label>
+                  </section>
+                </div>
+
+                <div className="col-md-12">
+                  {" "}
+                  {/* position input */}
+                  <section className="form-floating mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="position"
+                      placeholder="Station"
+                      value={employee.position}
+                      onChange={(e) => {
+                        setEmployee({
+                          ...employee,
+                          position: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="station">Position</label>
+                  </section>
+                </div>
+              </div>
             </section>
 
             {/* submit button */}
             <section className="modal-footer d-flex justify-content-center">
-              <button type="button" className="btn btn-success text-center ">
+              <button
+                type="button"
+                className="btn btn-success text-center "
+                onClick={() => {
+                  editEmployee();
+                }}
+              >
                 Confirm
               </button>
             </section>

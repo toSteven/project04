@@ -16,7 +16,7 @@ function AddEmployee({ closeModal, employee, setEmployee, addEmployee }) {
               ></button>
             </div>
             {/* input forms */}
-            <div className="modal-body">
+            <section className="modal-body">
               <div className="row">
                 <div className="col-md-6">
                   {" "}
@@ -207,7 +207,7 @@ function AddEmployee({ closeModal, employee, setEmployee, addEmployee }) {
                   </section>
                 </div>
               </div>
-            </div>
+            </section>
 
             {/* submit button */}
             <section className="modal-footer d-flex justify-content-center">

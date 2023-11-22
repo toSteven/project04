@@ -166,16 +166,17 @@ function DashBoard() {
   };
 
   // edit modal state
-  const [edittModalVisible, setEditodalVisibility] = useState(false);
+  const [edittModalVisible, setEditModalVisibility] = useState(false);
 
   // edit modal open
-  const openEditModal = () => {
-    setEditodalVisibility(true);
+  const openEditModal = (employee) => {
+    setEmployee(employee); // Set the employee state before opening the modal
+    setEditModalVisibility(true);
   };
 
   // edit modal close
   const closeEditModal = () => {
-    setEditodalVisibility(false);
+    setEditModalVisibility(false);
   };
 
   // 🔹 EDIT DATA FROM FIREBASE 🔹
@@ -281,12 +282,16 @@ function DashBoard() {
                     {/* Edit Data */}
                     <button
                       className="btn btn-dark m-2"
-                      onClick={openEditModal}
+                      onClick={() => openEditModal(employee)}
                     >
                       Edit
                     </button>
                     {edittModalVisible && (
-                      <EditEmployee closeModal={closeEditModal} />
+                      <EditEmployee
+                        closeModal={closeEditModal}
+                        employee={employee}
+                        setEmployee={setEmployee}
+                      />
                     )}
 
                     {/* Delete Data */}
