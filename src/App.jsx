@@ -8,6 +8,7 @@ import DashBoard from "./Dashboard";
 import NotFound from "./NotFound";
 import AddEmployee from "./AddEmployee";
 import EditEmployee from "./EditEmployee";
+import ViewEmployee from "./ViewEmployee";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<DashBoard />}></Route>
+            <Route path="viewEmployee" element={<ViewEmployee />}></Route>
             <Route path="addEmployee" element={<AddEmployee />}></Route>
             <Route path="editEmployee" element={<EditEmployee />}></Route>
           </Route>
