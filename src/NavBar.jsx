@@ -5,7 +5,7 @@ function NarBar({ auth, logout }) {
     <nav className="navbar navbar-expand-lg bg-secondary">
       <div className="container-fluid">
         <Link className="navbar-brand text-white" to="/">
-          NavBar
+          My Company
         </Link>
 
         <button
@@ -21,23 +21,43 @@ function NarBar({ auth, logout }) {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <NavLink className="nav-link text-white" to="/">
-                Dashboard
-              </NavLink>
-            </li>
+            {auth ? (
+              <li className="nav-item">
+                <NavLink className="nav-link text-white" to="/">
+                  Dashboard
+                </NavLink>
+              </li>
+            ) : null}
 
-            <li className="nav-item">
-              <NavLink
-                className="nav-link text-white"
-                to="/"
-                onClick={() => {
-                  logout();
-                }}
-              >
-                SignOut
-              </NavLink>
-            </li>
+            {auth ? null : (
+              <li className="nav-item">
+                <NavLink className="nav-link text-white" to="register">
+                  Register
+                </NavLink>
+              </li>
+            )}
+
+            {auth ? null : (
+              <li className="nav-item">
+                <NavLink className="nav-link text-white" to="login">
+                  Log In
+                </NavLink>
+              </li>
+            )}
+
+            {auth ? (
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link text-white"
+                  to="/"
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  SignOut
+                </NavLink>
+              </li>
+            ) : null}
           </ul>
         </div>
       </div>

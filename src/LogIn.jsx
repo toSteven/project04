@@ -30,7 +30,7 @@ function LogIn() {
   return (
     <>
       <section className="container">
-        <h1 className="display-4 text-center my-5">Employee Management</h1>
+        <h1 className="display-4 text-center m-5">Employee Management</h1>
         <div className="card mx-auto" style={{ maxWidth: "400px" }}>
           <div className="card-body">
             <h2 className="fw-bold text-center mb-4">Login</h2>

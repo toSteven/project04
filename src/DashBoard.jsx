@@ -261,7 +261,7 @@ function DashBoard() {
   if (credential) {
     return (
       <main className="container m-5">
-        <h1 className="display-3 text-center fw-bold my-3">Employee Records</h1>
+        <h1 className="display-3 text-center my-3">Employee Records</h1>
 
         {/* Top Controls */}
         <nav class="navbar bg-secondary rounded-3">
