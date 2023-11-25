@@ -1,4 +1,9 @@
-function EditEmployee({ closeModal }) {
+function EditEmployee({
+  closeModal,
+  selectedEmployee,
+  setSelectedEmployee,
+  editEmployee,
+}) {
   return (
     <>
       <section className="modal" tabIndex="-1" style={{ display: "block" }}>
@@ -19,7 +24,6 @@ function EditEmployee({ closeModal }) {
             <section className="modal-body">
               <div className="row">
                 <div className="col-md-6">
-                  {" "}
                   {/* last name input */}
                   <section className="form-floating mb-3">
                     <input
@@ -27,40 +31,59 @@ function EditEmployee({ closeModal }) {
                       className="form-control"
                       id="lastname"
                       placeholder="Last Name"
+                      value={selectedEmployee.lastname}
+                      onChange={(e) => {
+                        setSelectedEmployee({
+                          ...selectedEmployee,
+                          lastname: e.target.value,
+                        });
+                      }}
                     />
                     <label htmlFor="lastname">Last Name</label>
                   </section>
                 </div>
+
                 <div className="col-md-6">
-                  {" "}
                   {/* first name input */}
                   <section className="form-floating mb-3">
                     <input
                       type="text"
                       className="form-control"
                       id="firstname"
-                      placeholder="First Name"
+                      placeholder="Last Name"
+                      value={selectedEmployee.firstname}
+                      onChange={(e) => {
+                        setSelectedEmployee({
+                          ...selectedEmployee,
+                          firstname: e.target.value,
+                        });
+                      }}
                     />
                     <label htmlFor="firstname">First Name</label>
                   </section>
                 </div>
 
                 <div className="col-md-6">
-                  {" "}
-                  {/* age input */}
+                  {/*  age input */}
                   <section className="form-floating mb-3">
                     <input
                       type="number"
                       className="form-control"
                       id="age"
                       placeholder="Age"
-                      min={18}
+                      value={selectedEmployee.age}
+                      onChange={(e) => {
+                        setSelectedEmployee({
+                          ...selectedEmployee,
+                          age: e.target.value,
+                        });
+                      }}
                     />
                     <label htmlFor="age">Age</label>
                   </section>
                 </div>
+
                 <div className="col-md-6">
-                  {" "}
                   {/* gender input */}
                   <section className="form-floating mb-3">
                     <input
@@ -68,13 +91,19 @@ function EditEmployee({ closeModal }) {
                       className="form-control"
                       id="gender"
                       placeholder="Gender"
+                      value={selectedEmployee.gender}
+                      onChange={(e) => {
+                        setSelectedEmployee({
+                          ...selectedEmployee,
+                          gender: e.target.value,
+                        });
+                      }}
                     />
                     <label htmlFor="gender">Gender</label>
                   </section>
                 </div>
 
                 <div className="col-md-6">
-                  {" "}
                   {/* email input */}
                   <section className="form-floating mb-3">
                     <input
@@ -82,42 +111,39 @@ function EditEmployee({ closeModal }) {
                       className="form-control"
                       id="email"
                       placeholder="Email"
+                      value={selectedEmployee.email}
+                      onChange={(e) => {
+                        setSelectedEmployee({
+                          ...selectedEmployee,
+                          email: e.target.value,
+                        });
+                      }}
                     />
                     <label htmlFor="email">Email</label>
                   </section>
                 </div>
 
                 <div className="col-md-6">
-                  {" "}
-                  {/* mobile number input */}
+                  {/* mobile input */}
                   <section className="form-floating mb-3">
                     <input
                       type="tel"
-                      pattern="[[0-9]{3}-[0-9]{3}-[0-9]{5}"
                       className="form-control"
                       id="mobile"
-                      placeholder="Mobile No."
+                      placeholder="Mobile"
+                      value={selectedEmployee.mobile}
+                      onChange={(e) => {
+                        setSelectedEmployee({
+                          ...selectedEmployee,
+                          mobile: e.target.value,
+                        });
+                      }}
                     />
-                    <label htmlFor="mobile">Mobile No.</label>
+                    <label htmlFor="mobile">Mobile</label>
                   </section>
                 </div>
 
                 <div className="col-md-12">
-                  {" "}
-                  {/* address input */}
-                  <section className="form-floating mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="address"
-                      placeholder="Address"
-                    />
-                    <label htmlFor="address">Address</label>
-                  </section>
-                </div>
-
-                <div className="col-md-12">
-                  {" "}
                   {/* date input */}
                   <section className="form-floating mb-3">
                     <input
@@ -125,13 +151,19 @@ function EditEmployee({ closeModal }) {
                       className="form-control"
                       id="date"
                       placeholder="Date Hired"
+                      value={selectedEmployee.date}
+                      onChange={(e) => {
+                        setSelectedEmployee({
+                          ...selectedEmployee,
+                          date: e.target.value,
+                        });
+                      }}
                     />
                     <label htmlFor="date">Date Hired</label>
                   </section>
                 </div>
 
                 <div className="col-md-12">
-                  {" "}
                   {/* position input */}
                   <section className="form-floating mb-3">
                     <input
@@ -139,8 +171,15 @@ function EditEmployee({ closeModal }) {
                       className="form-control"
                       id="position"
                       placeholder="Position"
+                      value={selectedEmployee.position}
+                      onChange={(e) => {
+                        selectedEmployee({
+                          ...selectedEmployee,
+                          position: e.target.value,
+                        });
+                      }}
                     />
-                    <label htmlFor="station">Position</label>
+                    <label htmlFor="position">Position</label>
                   </section>
                 </div>
               </div>

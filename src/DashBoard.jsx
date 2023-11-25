@@ -166,11 +166,32 @@ function DashBoard() {
     }
   };
 
+  // 🔹 VIEW DATA FROM FIREBASE 🔹
+
+  // view modal state
+  const [viewModalVisible, setViewModalVisibility] = useState(false);
+
+  // selected employee state for state on employee state
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  // Function to open the ViewEmployee modal
+  const openViewModal = (employee) => {
+    setSelectedEmployee(employee);
+    setViewModalVisibility(true);
+  };
+
+  // Function to close the ViewEmployee modal
+  const closeViewModal = () => {
+    setSelectedEmployee(null);
+    setViewModalVisibility(false);
+  };
+
   // edit modal state
   const [editModalVisible, setEditModalVisibility] = useState(false);
 
   // edit modal open
-  const openEditModal = () => {
+  const openEditModal = (employee) => {
+    setSelectedEmployee(employee);
     setEditModalVisibility(true);
   };
 
@@ -185,32 +206,31 @@ function DashBoard() {
     const db = getFirestore(firebaseApp);
 
     try {
-      const employeeRef = doc(db, "database", employee.employee_id);
+      const employeeRef = doc(db, "database", selectedEmployee.employee_id);
 
       const updatedEmployee = {
-        lastname: employee.lastname,
-        firstname: employee.firstname,
-        age: employee.age,
-        lastname: employee.lastname,
-        gender: employee.gender,
-        email: employee.email,
-        mobile: employee.mobile,
-        address: employee.address,
-        date: employee.date,
-        position: employee.position,
+        lastname: selectedEmployee.lastname,
+        firstname: selectedEmployee.firstname,
+        age: selectedEmployee.age,
+        lastname: selectedEmployee.lastname,
+        gender: selectedEmployee.gender,
+        email: selectedEmployee.email,
+        mobile: selectedEmployee.mobile,
+        address: selectedEmployee.address,
+        date: selectedEmployee.date,
+        position: selectedEmployee.position,
       };
 
       updateDoc(updatedEmployee, {
-        lastname: employee.lastname,
-        firstname: employee.firstname,
-        age: employee.age,
-        lastname: employee.lastname,
-        gender: employee.gender,
-        email: employee.email,
-        mobile: employee.mobile,
-        address: employee.address,
-        date: employee.date,
-        position: employee.position,
+        lastname: selectedEmployee.lastname,
+        firstname: selectedEmployee.firstname,
+        age: selectedEmployee.age,
+        gender: selectedEmployee.gender,
+        email: selectedEmployee.email,
+        mobile: selectedEmployee.mobile,
+        address: selectedEmployee.address,
+        date: selectedEmployee.date,
+        position: selectedEmployee.position,
       });
 
       alert("Update successfuly !");
@@ -218,23 +238,6 @@ function DashBoard() {
     } catch (error) {
       alert("Update failed !");
     }
-  };
-
-  // view modal state
-  const [viewModalVisible, setViewModalVisibility] = useState(false);
-  // selected employee state for state on employee state
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
-
-  // Function to open the ViewEmployee modal
-  const openViewModal = (employee) => {
-    setSelectedEmployee(employee);
-    setViewModalVisibility(true);
-  };
-
-  // Function to close the ViewEmployee modal
-  const closeViewModal = () => {
-    setSelectedEmployee(null);
-    setViewModalVisibility(false);
   };
 
   return (
@@ -313,15 +316,16 @@ function DashBoard() {
                     {/* Edit Data */}
                     <button
                       className="btn btn-dark m-2"
-                      onClick={openEditModal}
+                      onClick={() => openEditModal(employee)}
                     >
                       Edit
                     </button>
                     {editModalVisible && (
                       <EditEmployee
                         closeModal={closeEditModal}
-                        employee={employee}
-                        setEmployee={setEmployee}
+                        selectedEmployee={selectedEmployee}
+                        setSelectedEmployee={setSelectedEmployee}
+                        editEmployee={editEmployee}
                       />
                     )}
 
