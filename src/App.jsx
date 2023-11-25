@@ -9,6 +9,8 @@ import NotFound from "./NotFound";
 import AddEmployee from "./AddEmployee";
 import EditEmployee from "./EditEmployee";
 import ViewEmployee from "./ViewEmployee";
+import LogIn from "./LogIn";
+import Register from "./Register";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
             <Route path="viewEmployee" element={<ViewEmployee />}></Route>
             <Route path="addEmployee" element={<AddEmployee />}></Route>
             <Route path="editEmployee" element={<EditEmployee />}></Route>
+            <Route path="login" element={<LogIn />}></Route>
+            <Route path="register" element={<Register />}></Route>
           </Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>

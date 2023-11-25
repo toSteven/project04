@@ -26,6 +26,30 @@ function NarBar() {
                 Dashboard
               </NavLink>
             </li>
+
+            <li className="nav-item">
+              <NavLink className="nav-link text-white" to="login">
+                LogIn
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink className="nav-link text-white" to="register">
+                Register
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                className="nav-link text-white"
+                to="/"
+                onClick={() => {
+                  logout();
+                }}
+              >
+                SignOut
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
