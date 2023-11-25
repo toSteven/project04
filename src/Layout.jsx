@@ -19,9 +19,7 @@ function Layout() {
         navigate("/login");
       }
     });
-
-    return () => unsubscribe();
-  }, [auth, navigate]);
+  }, []);
 
   const logout = async () => {
     try {
@@ -37,7 +35,7 @@ function Layout() {
 
   return (
     <main>
-      <NavBar credentials={credentials} logout={logout} />
+      <NavBar auth={credentials} logout={logout} />
       <section>
         <Outlet />
       </section>

@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 
-function NarBar({ logout }) {
+function NarBar({ auth, logout }) {
   return (
     <nav className="navbar navbar-expand-lg bg-secondary">
       <div className="container-fluid">

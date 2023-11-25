@@ -33,7 +33,7 @@ function Register() {
   return (
     <>
       <section className="container mt-5">
-        <div className="card">
+        <div className="card mx-auto" style={{ maxWidth: "400px" }}>
           <div className="card-body">
             <h1 className="fw-bold text-center">Register</h1>
 

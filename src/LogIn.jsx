@@ -29,12 +29,13 @@ function LogIn() {
 
   return (
     <>
-      <section className="container mt-5">
-        <div className="card">
+      <section className="container">
+        <h1 className="display-4 text-center my-5">Employee Management</h1>
+        <div className="card mx-auto" style={{ maxWidth: "400px" }}>
           <div className="card-body">
-            <h1 className="fw-bold text-center">Login</h1>
+            <h2 className="fw-bold text-center mb-4">Login</h2>
 
-            <div className="form-floating my-3">
+            <div className="mb-3">
               <input
                 type="email"
                 className="form-control"
@@ -43,10 +44,9 @@ function LogIn() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label htmlFor="email">Email</label>
             </div>
 
-            <div className="form-floating mb-3">
+            <div className="mb-3">
               <input
                 type="password"
                 className="form-control"
@@ -55,15 +55,17 @@ function LogIn() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <label htmlFor="password">Password</label>
             </div>
 
-            <button className="btn btn-dark" onClick={handleLogin}>
+            <button className="btn btn-dark w-100 mb-3" onClick={handleLogin}>
               Log In
             </button>
 
             <hr />
-            <Link to="/register">Register here.</Link>
+
+            <p className="text-center">
+              <Link to="/register">Register here.</Link>
+            </p>
           </div>
         </div>
       </section>

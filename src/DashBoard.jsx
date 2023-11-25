@@ -21,6 +21,10 @@ import {
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+// font awsome import
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+
 // component import
 import AddEmployee from "./AddEmployee";
 import EditEmployee from "./EditEmployee";
@@ -260,27 +264,28 @@ function DashBoard() {
         <h1 className="display-3 text-center fw-bold my-3">Employee Records</h1>
 
         {/* Top Controls */}
-        <section class="navbar bg-secondary rounded-3">
+        <nav class="navbar bg-secondary rounded-3">
           <div class="container-fluid">
-            {/* Add Employee Section */}
-            <section className="me-3">
-              <button
-                className="btn btn-dark rounded-3"
-                onClick={openInputModal}
-              >
-                + Add Employee
-              </button>
+            <form class="d-flex" role="search">
+              {/* Add Employee Section */}
+              <section className="me-3">
+                <button
+                  className="btn btn-dark rounded-3"
+                  onClick={openInputModal}
+                >
+                  + Add Employee
+                </button>
 
-              {inputModalVisible && (
-                <AddEmployee
-                  closeModal={closeInputModal} // pass close input modal function as props
-                  employee={employee} // pass  employee state  as props
-                  setEmployee={setEmployee} // pass  setemployee state  as props
-                  addEmployee={addEmployee} // pass  addemployee function  as props
-                />
-              )}
-            </section>
-            <form class="d-flex">
+                {inputModalVisible && (
+                  <AddEmployee
+                    closeModal={closeInputModal} // pass close input modal function as props
+                    employee={employee} // pass  employee state  as props
+                    setEmployee={setEmployee} // pass  setemployee state  as props
+                    addEmployee={addEmployee} // pass  addemployee function  as props
+                  />
+                )}
+              </section>
+
               {/* Search Employee Bar Section */}
               <section>
                 <input
@@ -293,7 +298,7 @@ function DashBoard() {
               </section>
             </form>
           </div>
-        </section>
+        </nav>
 
         {/* Data Table Display Section */}
         <section className="card mt-3">
@@ -319,10 +324,13 @@ function DashBoard() {
                     <td>
                       {/* Show Data */}
                       <button
-                        className="btn btn-dark m-2"
+                        className="btn m-2"
                         onClick={() => openViewModal(employee)} //pass open view modal function as props
                       >
-                        Data
+                        <FontAwesomeIcon
+                          icon={faEye}
+                          style={{ color: "#000000" }}
+                        />
                       </button>
                       {/* Employee Data Modal */}
                       {viewModalVisible && (
@@ -334,10 +342,13 @@ function DashBoard() {
 
                       {/* Edit Data */}
                       <button
-                        className="btn btn-dark m-2"
+                        className="btn m-2"
                         onClick={() => openEditModal(employee)} //pass open edit modal function as props
                       >
-                        Edit
+                        <FontAwesomeIcon
+                          icon={faPen}
+                          style={{ color: "#000000" }}
+                        />
                       </button>
                       {/* Edit Employee Modal */}
                       {editModalVisible && (
@@ -350,10 +361,13 @@ function DashBoard() {
 
                       {/* Delete Data */}
                       <button
-                        className="btn btn-dark m-2"
+                        className="btn m-2"
                         onClick={() => deleteEmployee(employee.employee_id)} //pass delete function as props
                       >
-                        Delete
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          style={{ color: "#000000" }}
+                        />
                       </button>
                     </td>
                   </tr>
