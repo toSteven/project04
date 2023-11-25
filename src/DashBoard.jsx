@@ -1,9 +1,14 @@
+// react imports
 import { useEffect, useState } from "react";
 
+// bootstrap import
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 
+// firebase config import
 import firebaseApp from "./Config";
+
+// fire base import
 import {
   getFirestore,
   collection,
@@ -13,9 +18,9 @@ import {
   addDoc,
   doc,
   deleteDoc,
-  updateDoc,
 } from "firebase/firestore";
 
+// component import
 import AddEmployee from "./AddEmployee";
 import EditEmployee from "./EditEmployee";
 import ViewEmployee from "./ViewEmployee";
@@ -29,8 +34,8 @@ function DashBoard() {
 
   // filtered search employee list function
   const filteredEmployeeList = employeeList.filter((employee) => {
-    const fullName = `${employee.lastname} ${employee.firstname}`.toLowerCase();
-    return fullName.includes(searchEmployee.toLowerCase());
+    const fullName = `${employee.lastname} ${employee.firstname}`.toLowerCase(); // get data by lastname or firstname
+    return fullName.includes(searchEmployee.toLowerCase()); // return as search data
   });
 
   // employee object state
@@ -50,23 +55,24 @@ function DashBoard() {
     // initialize config
     const db = getFirestore(firebaseApp);
 
-    // 🔹 FETCH DATA FROM FIREBASE 🔹
+    // 🔹 FETCH DATA TO SHOW ON TABLE FROM FIREBASE 🔹
     try {
       onSnapshot(
+        // fetch data orber by asc
         query(collection(db, "database"), orderBy("lastname", "asc")),
         (snapshot) => {
-          const snapList = [];
+          const snapList = []; // snap variable
 
           snapshot.forEach((data) => {
-            const getEmployeeData = data.data();
-            getEmployeeData["employee_id"] = data.id;
-            snapList.push(getEmployeeData);
+            const getEmployeeData = data.data(); // get data
+            getEmployeeData["employee_id"] = data.id; // get id
+            snapList.push(getEmployeeData); // push the data get to snap variable
           });
-          setEmployeeList(snapList);
+          setEmployeeList(snapList); // set to employee state
         }
       );
     } catch (error) {
-      alert("Can't fetch data from firebase!");
+      alert("Can't fetch data from firebase!"); // error msg
     }
   }, []);
 
@@ -75,11 +81,13 @@ function DashBoard() {
 
   // inpute modal open
   const openInputModal = () => {
+    // show input modal
     setInputModalVisibility(true);
   };
 
   // inpute modal close
   const closeInputModal = () => {
+    // close input modal
     setInputModalVisibility(false);
 
     // cleare flieds
@@ -99,7 +107,7 @@ function DashBoard() {
   // date to string function
   const formatDate = (date) => {
     if (date && date.toDate) {
-      return date.toDate().toLocaleDateString();
+      return date.toDate().toLocaleDateString(); // return date as a string
     }
     return "";
   };
@@ -130,6 +138,7 @@ function DashBoard() {
       addDoc(collection(db, "database"), employee);
 
       alert(
+        // pop up msg
         `${employee.lastname} ${employee.firstname} added employee as ${employee.position} at ${employee.date}`
       );
 
@@ -171,19 +180,19 @@ function DashBoard() {
   // view modal state
   const [viewModalVisible, setViewModalVisibility] = useState(false);
 
-  // selected employee state as prop for state on employee state
+  // selected employee state  as thresh for state on employee state
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   // Function to open the ViewEmployee modal
   const openViewModal = (employee) => {
     setSelectedEmployee(employee); // props to pass
-    setViewModalVisibility(true);
+    setViewModalVisibility(true); // show view modal
   };
 
   // Function to close the ViewEmployee modal
   const closeViewModal = () => {
-    setSelectedEmployee(null);
-    setViewModalVisibility(false);
+    setSelectedEmployee(null); // set props to null
+    setViewModalVisibility(false); // close view modal
   };
 
   // edit modal state
@@ -192,12 +201,12 @@ function DashBoard() {
   // edit modal open
   const openEditModal = (employee) => {
     setSelectedEmployee(employee); // props to pass
-    setEditModalVisibility(true);
+    setEditModalVisibility(true); // show edit modal
   };
 
   // edit modal close
   const closeEditModal = () => {
-    setEditModalVisibility(false);
+    setEditModalVisibility(false); // close edit modal
   };
 
   // 🔹 FETCH DATA FOR EDIT MODAL FROM FIREBASE 🔹
@@ -206,6 +215,7 @@ function DashBoard() {
     const db = getFirestore(firebaseApp);
 
     try {
+      // congif doc
       const employeeRef = doc(db, "database", selectedEmployee.employee_id);
 
       // fetch data to show data of employee to edit
@@ -222,7 +232,7 @@ function DashBoard() {
         position: selectedEmployee.position,
       };
     } catch (error) {
-      alert("Cant getch data!");
+      alert("Cant getch data!"); // pop up msg
     }
   };
 
@@ -241,10 +251,10 @@ function DashBoard() {
 
             {inputModalVisible && (
               <AddEmployee
-                closeModal={closeInputModal}
-                employee={employee}
-                setEmployee={setEmployee}
-                addEmployee={addEmployee}
+                closeModal={closeInputModal} // pass close input modal function as props
+                employee={employee} // pass  employee state  as props
+                setEmployee={setEmployee} // pass  setemployee state  as props
+                addEmployee={addEmployee} // pass  addemployee function  as props
               />
             )}
           </section>
@@ -255,8 +265,8 @@ function DashBoard() {
                 type="text"
                 className="form-control bg-light"
                 placeholder="Search employee..."
-                value={searchEmployee}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={searchEmployee} // set value as search employee
+                onChange={(e) => setSearchQuery(e.target.value)} // set input as value
               />
             </section>
           </form>
@@ -278,6 +288,7 @@ function DashBoard() {
 
             {/*  Data  */}
             <tbody>
+              {/* Show Filtered Data */}
               {filteredEmployeeList.map((employee) => (
                 <tr key={employee.employee_id}>
                   <td>{employee.lastname}</td>
@@ -287,37 +298,38 @@ function DashBoard() {
                     {/* Show Data */}
                     <button
                       className="btn btn-dark m-2"
-                      onClick={() => openViewModal(employee)}
+                      onClick={() => openViewModal(employee)} //pass open view modal function as props
                     >
                       Data
                     </button>
                     {/* Employee Data Modal */}
                     {viewModalVisible && (
                       <ViewEmployee
-                        closeModal={closeViewModal}
-                        employee={selectedEmployee}
+                        closeModal={closeViewModal} //pass close view modal function as props
+                        employee={selectedEmployee} //pass thesh state as props
                       />
                     )}
 
                     {/* Edit Data */}
                     <button
                       className="btn btn-dark m-2"
-                      onClick={() => openEditModal(employee)}
+                      onClick={() => openEditModal(employee)} //pass open edit modal function as props
                     >
                       Edit
                     </button>
+                    {/* Edit Employee Modal */}
                     {editModalVisible && (
                       <EditEmployee
-                        closeModal={closeEditModal}
-                        selectedEmployee={selectedEmployee}
-                        setSelectedEmployee={setSelectedEmployee}
+                        closeModal={closeEditModal} //pass close edit modal function as props
+                        selectedEmployee={selectedEmployee} //pass thesh state as props
+                        setSelectedEmployee={setSelectedEmployee} //pass set thesh state as props
                       />
                     )}
 
                     {/* Delete Data */}
                     <button
                       className="btn btn-dark m-2"
-                      onClick={() => deleteEmployee(employee.employee_id)}
+                      onClick={() => deleteEmployee(employee.employee_id)} //pass delete function as props
                     >
                       Delete
                     </button>
