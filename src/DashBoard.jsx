@@ -245,7 +245,6 @@ function DashBoard() {
         lastname: selectedEmployee.lastname,
         firstname: selectedEmployee.firstname,
         age: selectedEmployee.age,
-        lastname: selectedEmployee.lastname,
         gender: selectedEmployee.gender,
         email: selectedEmployee.email,
         mobile: selectedEmployee.mobile,
@@ -266,7 +265,7 @@ function DashBoard() {
         {/* Top Controls */}
         <nav class="navbar bg-secondary rounded-3">
           <div class="container-fluid">
-            <form class="d-flex" role="search">
+            <section class="d-flex" role="search">
               {/* Add Employee Section */}
               <section className="me-3">
                 <button
@@ -296,7 +295,7 @@ function DashBoard() {
                   onChange={(e) => setSearchQuery(e.target.value)} // set input as value
                 />
               </section>
-            </form>
+            </section>
           </div>
         </nav>
 

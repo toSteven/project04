@@ -203,7 +203,7 @@ function AddEmployee({ closeModal, employee, setEmployee, addEmployee }) {
                         });
                       }}
                     />
-                    <label htmlFor="station">Position</label>
+                    <label htmlFor="position">Position</label>
                   </section>
                 </div>
               </div>
