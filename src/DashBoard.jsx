@@ -171,12 +171,12 @@ function DashBoard() {
   // view modal state
   const [viewModalVisible, setViewModalVisibility] = useState(false);
 
-  // selected employee state for state on employee state
+  // selected employee state as prop for state on employee state
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   // Function to open the ViewEmployee modal
   const openViewModal = (employee) => {
-    setSelectedEmployee(employee);
+    setSelectedEmployee(employee); // props to pass
     setViewModalVisibility(true);
   };
 
@@ -191,7 +191,7 @@ function DashBoard() {
 
   // edit modal open
   const openEditModal = (employee) => {
-    setSelectedEmployee(employee);
+    setSelectedEmployee(employee); // props to pass
     setEditModalVisibility(true);
   };
 
@@ -200,14 +200,15 @@ function DashBoard() {
     setEditModalVisibility(false);
   };
 
-  // 🔹 EDIT DATA FROM FIREBASE 🔹
-  const editEmployee = () => {
+  // 🔹 FETCH DATA FOR EDIT MODAL FROM FIREBASE 🔹
+  const fetchEmployee = () => {
     // initialize config
     const db = getFirestore(firebaseApp);
 
     try {
       const employeeRef = doc(db, "database", selectedEmployee.employee_id);
 
+      // fetch data to show data of employee to edit
       const updatedEmployee = {
         lastname: selectedEmployee.lastname,
         firstname: selectedEmployee.firstname,
@@ -220,23 +221,8 @@ function DashBoard() {
         date: selectedEmployee.date,
         position: selectedEmployee.position,
       };
-
-      updateDoc(updatedEmployee, {
-        lastname: selectedEmployee.lastname,
-        firstname: selectedEmployee.firstname,
-        age: selectedEmployee.age,
-        gender: selectedEmployee.gender,
-        email: selectedEmployee.email,
-        mobile: selectedEmployee.mobile,
-        address: selectedEmployee.address,
-        date: selectedEmployee.date,
-        position: selectedEmployee.position,
-      });
-
-      alert("Update successfuly !");
-      closeEditModal();
     } catch (error) {
-      alert("Update failed !");
+      alert("Cant getch data!");
     }
   };
 
@@ -325,7 +311,6 @@ function DashBoard() {
                         closeModal={closeEditModal}
                         selectedEmployee={selectedEmployee}
                         setSelectedEmployee={setSelectedEmployee}
-                        editEmployee={editEmployee}
                       />
                     )}
 

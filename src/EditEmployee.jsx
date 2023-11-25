@@ -1,9 +1,38 @@
-function EditEmployee({
-  closeModal,
-  selectedEmployee,
-  setSelectedEmployee,
-  editEmployee,
-}) {
+import { doc, updateDoc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+import firebaseApp from "./Config";
+
+function EditEmployee({ closeModal, selectedEmployee, setSelectedEmployee }) {
+  // 🔹 FEDIT DATA FOR FIREBASE 🔹
+  const editEmployee = async () => {
+    try {
+      // initialize config
+      const db = getFirestore(firebaseApp);
+      const employeeRef = doc(db, "database", selectedEmployee.employee_id);
+
+      // get data from fetch data edit
+      const updatedEmployee = {
+        lastname: selectedEmployee.lastname,
+        firstname: selectedEmployee.firstname,
+        age: selectedEmployee.age,
+        gender: selectedEmployee.gender,
+        email: selectedEmployee.email,
+        mobile: selectedEmployee.mobile,
+        address: selectedEmployee.address,
+        date: selectedEmployee.date,
+        position: selectedEmployee.position,
+      };
+
+      // update to db
+      await updateDoc(employeeRef, updatedEmployee);
+
+      alert("Update successful!");
+      closeModal();
+    } catch (error) {
+      alert("Update failed!");
+    }
+  };
+
   return (
     <>
       <section className="modal" tabIndex="-1" style={{ display: "block" }}>
@@ -147,6 +176,26 @@ function EditEmployee({
                   {/* date input */}
                   <section className="form-floating mb-3">
                     <input
+                      type="address"
+                      className="form-control"
+                      id="address"
+                      placeholder="Address"
+                      value={selectedEmployee.address}
+                      onChange={(e) => {
+                        setSelectedEmployee({
+                          ...selectedEmployee,
+                          address: e.target.value,
+                        });
+                      }}
+                    />
+                    <label htmlFor="address">Address</label>
+                  </section>
+                </div>
+
+                <div className="col-md-12">
+                  {/* date input */}
+                  <section className="form-floating mb-3">
+                    <input
                       type="date"
                       className="form-control"
                       id="date"
@@ -173,7 +222,7 @@ function EditEmployee({
                       placeholder="Position"
                       value={selectedEmployee.position}
                       onChange={(e) => {
-                        selectedEmployee({
+                        setSelectedEmployee({
                           ...selectedEmployee,
                           position: e.target.value,
                         });
@@ -187,7 +236,11 @@ function EditEmployee({
 
             {/* submit button */}
             <section className="modal-footer d-flex justify-content-center">
-              <button type="button" className="btn btn-success text-center ">
+              <button
+                type="button"
+                className="btn btn-success text-center "
+                onClick={editEmployee}
+              >
                 Confirm
               </button>
             </section>
