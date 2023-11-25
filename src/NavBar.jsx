@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 
-function NarBar() {
+function NarBar({ logout }) {
   return (
     <nav className="navbar navbar-expand-lg bg-secondary">
       <div className="container-fluid">
@@ -24,18 +24,6 @@ function NarBar() {
             <li className="nav-item">
               <NavLink className="nav-link text-white" to="/">
                 Dashboard
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink className="nav-link text-white" to="login">
-                LogIn
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink className="nav-link text-white" to="register">
-                Register
               </NavLink>
             </li>
 

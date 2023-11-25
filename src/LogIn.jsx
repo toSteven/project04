@@ -1,20 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from "./Config";
 
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const navigate = useNavigate(); // Add this line
 
   const handleLogin = () => {
     if (email !== "" && password !== "") {
       const auth = getAuth(firebaseApp);
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
           alert("Sign in successful");
           navigate("/");
@@ -60,7 +58,7 @@ function LogIn() {
               <label htmlFor="password">Password</label>
             </div>
 
-            <button className="btn btn-dark" onClick={() => handleLogin()}>
+            <button className="btn btn-dark" onClick={handleLogin}>
               Log In
             </button>
 

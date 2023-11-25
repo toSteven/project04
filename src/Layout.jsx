@@ -1,49 +1,43 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import NavBar from "./NavBar";
-
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-
-// firebase config import
 import firebaseApp from "./Config";
 
 function Layout() {
-  // credentials state
-  const [credentials, setCredentials] = useState(false);
-
-  // initialize auth
+  const [credentials, setCredentials] = useState(false); // Change null to false
   const auth = getAuth(firebaseApp);
+  const navigate = useNavigate(); // Add this line
 
-  // 🔹 CREDENTIALS CONFIG 🔹
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCredentials(true);
-        const uid = user.uid;
       } else {
         setCredentials(false);
+        // Navigate to login page
+        navigate("/login");
       }
     });
-  }, []);
 
-  // log out function
-  const logout = () => {
-    // initialize auth
-    const auth = getAuth(firebaseApp);
+    return () => unsubscribe();
+  }, [auth, navigate]);
 
-    // 🔹 SIGNOUT CONFIG 🔹
-    // signOut(auth)
-    //   .then(() => {
-    //     alert("You have logout!");
-    //     setCredentials(false);
-    //   })
-    //   .catch((error) => {});
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      alert("You have logged out!");
+      setCredentials(false);
+      // Navigate to login page
+      navigate("/login");
+    } catch (error) {
+      console.error("Error signing out", error);
+    }
   };
 
   return (
     <main>
-      <NavBar />
+      <NavBar credentials={credentials} logout={logout} />
       <section>
         <Outlet />
       </section>

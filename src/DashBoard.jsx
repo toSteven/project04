@@ -19,6 +19,7 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // component import
 import AddEmployee from "./AddEmployee";
@@ -51,6 +52,9 @@ function DashBoard() {
     position: "",
   });
 
+  // credential state
+  const [credential, setCredential] = useState(false);
+
   useEffect(() => {
     // initialize config
     const db = getFirestore(firebaseApp);
@@ -74,6 +78,20 @@ function DashBoard() {
     } catch (error) {
       alert("Can't fetch data from firebase!"); // error msg
     }
+
+    // 🔹 CREDENTIALS CONFIG 🔹
+
+    // initialize auth
+    const auth = getAuth(firebaseApp);
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCredential(true);
+        const uid = user.uid;
+      } else {
+        setCredential(false);
+      }
+    });
   }, []);
 
   // input modal state
@@ -236,112 +254,119 @@ function DashBoard() {
     }
   };
 
-  return (
-    <main className="container m-5">
-      <h1 className="display-3 text-center fw-bold my-3">Employee Records</h1>
+  if (credential) {
+    return (
+      <main className="container m-5">
+        <h1 className="display-3 text-center fw-bold my-3">Employee Records</h1>
 
-      {/* Top Controls */}
-      <section class="navbar bg-secondary rounded-3">
-        <div class="container-fluid">
-          {/* Add Employee Section */}
-          <section className="me-3">
-            <button className="btn btn-dark rounded-3" onClick={openInputModal}>
-              + Add Employee
-            </button>
+        {/* Top Controls */}
+        <section class="navbar bg-secondary rounded-3">
+          <div class="container-fluid">
+            {/* Add Employee Section */}
+            <section className="me-3">
+              <button
+                className="btn btn-dark rounded-3"
+                onClick={openInputModal}
+              >
+                + Add Employee
+              </button>
 
-            {inputModalVisible && (
-              <AddEmployee
-                closeModal={closeInputModal} // pass close input modal function as props
-                employee={employee} // pass  employee state  as props
-                setEmployee={setEmployee} // pass  setemployee state  as props
-                addEmployee={addEmployee} // pass  addemployee function  as props
-              />
-            )}
-          </section>
-          <form class="d-flex">
-            {/* Search Employee Bar Section */}
-            <section>
-              <input
-                type="text"
-                className="form-control bg-light"
-                placeholder="Search employee..."
-                value={searchEmployee} // set value as search employee
-                onChange={(e) => setSearchQuery(e.target.value)} // set input as value
-              />
+              {inputModalVisible && (
+                <AddEmployee
+                  closeModal={closeInputModal} // pass close input modal function as props
+                  employee={employee} // pass  employee state  as props
+                  setEmployee={setEmployee} // pass  setemployee state  as props
+                  addEmployee={addEmployee} // pass  addemployee function  as props
+                />
+              )}
             </section>
-          </form>
-        </div>
-      </section>
+            <form class="d-flex">
+              {/* Search Employee Bar Section */}
+              <section>
+                <input
+                  type="text"
+                  className="form-control bg-light"
+                  placeholder="Search employee..."
+                  value={searchEmployee} // set value as search employee
+                  onChange={(e) => setSearchQuery(e.target.value)} // set input as value
+                />
+              </section>
+            </form>
+          </div>
+        </section>
 
-      {/* Data Table Display Section */}
-      <section className="card mt-3">
-        <div className="card-body">
-          <table className="table text-center">
-            <thead>
-              <tr>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Position</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-
-            {/*  Data  */}
-            <tbody>
-              {/* Show Filtered Data */}
-              {filteredEmployeeList.map((employee) => (
-                <tr key={employee.employee_id}>
-                  <td>{employee.lastname}</td>
-                  <td>{employee.firstname}</td>
-                  <td>{employee.position}</td>
-                  <td>
-                    {/* Show Data */}
-                    <button
-                      className="btn btn-dark m-2"
-                      onClick={() => openViewModal(employee)} //pass open view modal function as props
-                    >
-                      Data
-                    </button>
-                    {/* Employee Data Modal */}
-                    {viewModalVisible && (
-                      <ViewEmployee
-                        closeModal={closeViewModal} //pass close view modal function as props
-                        employee={selectedEmployee} //pass thesh state as props
-                      />
-                    )}
-
-                    {/* Edit Data */}
-                    <button
-                      className="btn btn-dark m-2"
-                      onClick={() => openEditModal(employee)} //pass open edit modal function as props
-                    >
-                      Edit
-                    </button>
-                    {/* Edit Employee Modal */}
-                    {editModalVisible && (
-                      <EditEmployee
-                        closeModal={closeEditModal} //pass close edit modal function as props
-                        selectedEmployee={selectedEmployee} //pass thesh state as props
-                        setSelectedEmployee={setSelectedEmployee} //pass set thesh state as props
-                      />
-                    )}
-
-                    {/* Delete Data */}
-                    <button
-                      className="btn btn-dark m-2"
-                      onClick={() => deleteEmployee(employee.employee_id)} //pass delete function as props
-                    >
-                      Delete
-                    </button>
-                  </td>
+        {/* Data Table Display Section */}
+        <section className="card mt-3">
+          <div className="card-body">
+            <table className="table text-center">
+              <thead>
+                <tr>
+                  <th>Last Name</th>
+                  <th>First Name</th>
+                  <th>Position</th>
+                  <th>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-  );
+              </thead>
+
+              {/*  Data  */}
+              <tbody>
+                {/* Show Filtered Data */}
+                {filteredEmployeeList.map((employee) => (
+                  <tr key={employee.employee_id}>
+                    <td>{employee.lastname}</td>
+                    <td>{employee.firstname}</td>
+                    <td>{employee.position}</td>
+                    <td>
+                      {/* Show Data */}
+                      <button
+                        className="btn btn-dark m-2"
+                        onClick={() => openViewModal(employee)} //pass open view modal function as props
+                      >
+                        Data
+                      </button>
+                      {/* Employee Data Modal */}
+                      {viewModalVisible && (
+                        <ViewEmployee
+                          closeModal={closeViewModal} //pass close view modal function as props
+                          employee={selectedEmployee} //pass thesh state as props
+                        />
+                      )}
+
+                      {/* Edit Data */}
+                      <button
+                        className="btn btn-dark m-2"
+                        onClick={() => openEditModal(employee)} //pass open edit modal function as props
+                      >
+                        Edit
+                      </button>
+                      {/* Edit Employee Modal */}
+                      {editModalVisible && (
+                        <EditEmployee
+                          closeModal={closeEditModal} //pass close edit modal function as props
+                          selectedEmployee={selectedEmployee} //pass thesh state as props
+                          setSelectedEmployee={setSelectedEmployee} //pass set thesh state as props
+                        />
+                      )}
+
+                      {/* Delete Data */}
+                      <button
+                        className="btn btn-dark m-2"
+                        onClick={() => deleteEmployee(employee.employee_id)} //pass delete function as props
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    );
+  } else {
+    return;
+  }
 }
 
 export default DashBoard;
