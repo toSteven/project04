@@ -301,7 +301,10 @@ function DashBoard() {
 
         {/* Data Table Display Section */}
         <section className="card mt-3">
-          <div className="card-body">
+          <div
+            className="card-body"
+            style={{ maxHeight: "400px", overflowY: "auto" }}
+          >
             <table className="table text-center">
               <thead>
                 <tr>

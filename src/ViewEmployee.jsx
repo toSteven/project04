@@ -17,7 +17,7 @@ function ViewEmployee({ closeModal, employee }) {
             </section>
 
             {/* employee data */}
-            <section className="modal-body">
+            <section className="modal-body fw-bold">
               <p>Last Name: {employee.lastname}</p>
               <p>First Name: {employee.firstname}</p>
               <p>Age: {employee.age}</p>
