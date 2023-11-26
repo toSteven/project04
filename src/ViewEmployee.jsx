@@ -23,7 +23,7 @@ function ViewEmployee({ closeModal, employee }) {
               <p>Age: {employee.age}</p>
               <p>Gender: {employee.gender}</p>
               <p>Email: {employee.email}</p>
-              <p>Email: {employee.mobile}</p>
+              <p>Mobile No: {employee.mobile}</p>
               <p>Address: {employee.address}</p>
               <p>Date Hired: {employee.date}</p>
               <p>Position: {employee.position}</p>
