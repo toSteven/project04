@@ -1,8 +1,11 @@
+// bootstrap imports
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 
+// react imports
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+// component imports
 import Layout from "./Layout";
 import DashBoard from "./DashBoard";
 import NotFound from "./NotFound";
@@ -15,6 +18,7 @@ import Register from "./Register";
 function App() {
   return (
     <>
+      {/*  routes build */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -25,7 +29,6 @@ function App() {
             <Route path="login" element={<LogIn />}></Route>
             <Route path="register" element={<Register />}></Route>
           </Route>
-
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>

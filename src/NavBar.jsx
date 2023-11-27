@@ -1,13 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
 
+// props of auth & logout
 function NarBar({ auth, logout }) {
   return (
     <nav className="navbar navbar-expand-lg bg-secondary">
       <div className="container-fluid">
+        {/* app name */}
         <Link className="navbar-brand text-white" to="/">
           My Company
         </Link>
 
+        {/* burger btn */}
         <button
           className="navbar-toggler bg-light"
           type="button"
@@ -17,10 +20,12 @@ function NarBar({ auth, logout }) {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
+          {/* burger icon */}
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
+            {/* show nav item if log in */}
             {auth ? (
               <li className="nav-item">
                 <NavLink className="nav-link text-white" to="/">
@@ -29,6 +34,7 @@ function NarBar({ auth, logout }) {
               </li>
             ) : null}
 
+            {/* show nav item if log out */}
             {auth ? null : (
               <li className="nav-item">
                 <NavLink className="nav-link text-white" to="register">
@@ -37,6 +43,7 @@ function NarBar({ auth, logout }) {
               </li>
             )}
 
+            {/* show nav item if log out */}
             {auth ? null : (
               <li className="nav-item">
                 <NavLink className="nav-link text-white" to="login">
@@ -45,6 +52,7 @@ function NarBar({ auth, logout }) {
               </li>
             )}
 
+            {/* show nav item if log in */}
             {auth ? (
               <li className="nav-item">
                 <NavLink

@@ -1,3 +1,4 @@
+// props of close modal, employee state and add employee function
 function AddEmployee({ closeModal, employee, setEmployee, addEmployee }) {
   return (
     <>

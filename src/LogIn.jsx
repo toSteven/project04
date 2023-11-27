@@ -4,10 +4,13 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from "./Config";
 
 function LogIn() {
+  // email & password state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Add this line
+  // navigate config
+  const navigate = useNavigate();
 
+  // log in config
   const handleLogin = () => {
     if (email !== "" && password !== "") {
       const auth = getAuth(firebaseApp);
@@ -36,6 +39,7 @@ function LogIn() {
             <h2 className="fw-bold text-center mb-4">Login</h2>
 
             <div className="mb-3">
+              {/* Email Input */}
               <input
                 type="email"
                 className="form-control"
@@ -47,6 +51,7 @@ function LogIn() {
             </div>
 
             <div className="mb-3">
+              {/* Password Input */}
               <input
                 type="password"
                 className="form-control"
@@ -57,12 +62,14 @@ function LogIn() {
               />
             </div>
 
+            {/* Log In Btn */}
             <button className="btn btn-dark w-100 mb-3" onClick={handleLogin}>
               Log In
             </button>
 
             <hr />
 
+            {/* Link for Register */}
             <p className="text-center">
               <Link to="/register">Register here.</Link>
             </p>

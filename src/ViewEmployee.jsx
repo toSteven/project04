@@ -1,3 +1,4 @@
+// props of close moodal & employee state
 function ViewEmployee({ closeModal, employee }) {
   return (
     <>
@@ -29,7 +30,7 @@ function ViewEmployee({ closeModal, employee }) {
               <p>Position: {employee.position}</p>
             </section>
 
-            {/* submit button */}
+            {/* close button */}
             <section className="modal-footer d-flex justify-content-center">
               <button
                 type="button"

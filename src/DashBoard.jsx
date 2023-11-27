@@ -1,10 +1,6 @@
 // react imports
 import { useEffect, useState } from "react";
 
-// bootstrap import
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.js";
-
 // firebase config import
 import firebaseApp from "./Config";
 
@@ -88,6 +84,7 @@ function DashBoard() {
     // initialize auth
     const auth = getAuth(firebaseApp);
 
+    // credential config
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setCredential(true);
@@ -101,13 +98,13 @@ function DashBoard() {
   // input modal state
   const [inputModalVisible, setInputModalVisibility] = useState(false);
 
-  // inpute modal open
+  // input modal open
   const openInputModal = () => {
     // show input modal
     setInputModalVisibility(true);
   };
 
-  // inpute modal close
+  // input modal close
   const closeInputModal = () => {
     // close input modal
     setInputModalVisibility(false);
@@ -126,7 +123,7 @@ function DashBoard() {
     });
   };
 
-  // date to string function
+  // convert date to string function
   const formatDate = (date) => {
     if (date && date.toDate) {
       return date.toDate().toLocaleDateString(); // return date as a string
@@ -197,7 +194,7 @@ function DashBoard() {
     }
   };
 
-  // 🔹 VIEW DATA FROM FIREBASE 🔹
+  // 🔹 VIEW EMPLOYEE DATA FIREBASE 🔹
 
   // view modal state
   const [viewModalVisible, setViewModalVisibility] = useState(false);

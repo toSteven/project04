@@ -2,6 +2,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import firebaseApp from "./Config";
 
+// props of close modal & selected employee state
 function EditEmployee({ closeModal, selectedEmployee, setSelectedEmployee }) {
   // 🔹 FEDIT DATA FOR FIREBASE 🔹
   const editEmployee = async () => {

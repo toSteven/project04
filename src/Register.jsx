@@ -5,10 +5,13 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import firebaseApp from "./Config";
 
 function Register() {
+  //email & password state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  // navigate congif
+  const navigate = useNavigate();
 
+  // register config
   const handleRegister = () => {
     if (email !== "" && password !== "") {
       const auth = getAuth(firebaseApp);
@@ -18,7 +21,6 @@ function Register() {
           const user = userCredential.user;
           alert("Registration successful");
           navigate("/login");
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -38,6 +40,7 @@ function Register() {
             <h1 className="fw-bold text-center">Register</h1>
 
             <div className="form-floating my-3">
+              {/* Email Input */}
               <input
                 type="email"
                 className="form-control"
@@ -50,6 +53,7 @@ function Register() {
             </div>
 
             <div className="form-floating mb-3">
+              {/* Password Input */}
               <input
                 type="password"
                 className="form-control"
@@ -61,10 +65,12 @@ function Register() {
               <label htmlFor="password">Password</label>
             </div>
 
+            {/* Register Btn */}
             <button className="btn btn-dark" onClick={() => handleRegister()}>
               Register
             </button>
             <hr />
+            {/* Link to Login */}
             <Link to="/login" className="">
               Already have an account? Log in here.
             </Link>
