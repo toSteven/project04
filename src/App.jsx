@@ -4,7 +4,7 @@ import "bootstrap/dist/js/bootstrap.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Layout from "./Layout";
-import DashBoard from "./Dashboard";
+import DashBoard from "./DashBoard";
 import NotFound from "./NotFound";
 import AddEmployee from "./AddEmployee";
 import EditEmployee from "./EditEmployee";
