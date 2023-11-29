@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/"
+    },
+    {
+      "scr": "/DashBoard",
+      "dest": "/"
+    }
+  ]
+}
