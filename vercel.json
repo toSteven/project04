@@ -5,7 +5,7 @@
       "dest": "/"
     },
     {
-      "scr": "/DashBoard",
+      "scr": "/main",
       "dest": "/"
     }
   ]
